@@ -1,0 +1,22 @@
+#
+# Reverse proxy using https://github.com/jwilder/nginx-proxy
+#
+# Proxies docker containers specified using VIRTUAL_HOST=foo.bar.com to port 80
+#
+version: '2'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: proxy
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+# Following is the demo suggested as a test at jwilder/nginx-proxy
+#  whoami:
+#    image: jwilder/whoami
+#    environment:
+#      - VIRTUAL_HOST=whoami.local
