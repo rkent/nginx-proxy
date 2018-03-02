@@ -3,17 +3,24 @@
 #
 # Proxies docker containers specified using VIRTUAL_HOST=foo.bar.com to port 80
 #
-version: '2'
+# See also https://blog.ssdnodes.com/blog/tutorial-using-docker-and-nginx-to-host-multiple-websites/
+#
+version: '3'
 
 services:
   nginx-proxy:
     image: jwilder/nginx-proxy:alpine
-    container_name: proxy
+    container_name: nginx-proxy
     restart: always
     ports:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
 
 # Following is the demo suggested as a test at jwilder/nginx-proxy
 #  whoami:
