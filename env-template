@@ -1,0 +1,3 @@
+# Copy to .env and update parameters
+IP_ADDR=192.168.99.100
+DOMAIN=.ed
